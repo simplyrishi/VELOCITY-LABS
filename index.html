@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocity Labs | Modernizing Small Businesses</title>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Minimalist CSS Variables */
+        :root { --bg-color: #ffffff; --text-main: #0a0a0a; --text-muted: #525252; --border-color: #e5e5e5; --black: #000000; --whatsapp-green: #25D366; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.03em; }
+        p { font-weight: 300; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 5%; background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--text-main); text-decoration: none; letter-spacing: -0.05em; text-transform: uppercase; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s ease; }
+        .nav-links a:hover { color: var(--text-main); }
+
+        /* Buttons */
+        .cta-btn {
+            background-color: var(--black); color: var(--bg-color) !important; padding: 0.75rem 1.5rem;
+            border-radius: 4px; font-weight: 500; transition: opacity 0.2s ease; text-decoration: none;
+            display: inline-block; cursor: pointer; border: none; font-size: 1rem;
+        }
+        .cta-btn:hover { opacity: 0.8; }
+        .btn-large { padding: 1.2rem 2.5rem; font-size: 1.1rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+        .hero { padding: 10rem 0 6rem; }
+        .hero h1 { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.1; margin-bottom: 2rem; max-width: 900px; }
+        .hero p { font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--text-muted); max-width: 700px; margin-bottom: 3rem; line-height: 1.5; }
+
+        .section-padding { padding: 8rem 0; border-top: 1px solid var(--border-color); }
+        .section-header { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; }
+
+        /* Results / Stats Section */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-top: 3rem; }
+        .stat-card { padding-left: 1.5rem; border-left: 3px solid var(--text-main); }
+        .stat-number { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.05em; }
+        .stat-label { font-size: 1.1rem; color: var(--text-muted); font-weight: 500; }
+
+        /* Capabilities Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem 3rem; }
+        .service-card i { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-main); }
+        .service-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+        .service-card p { color: var(--text-muted); font-size: 1rem; }
+
+        /* How it Works Section */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem 2rem; }
+        .step-card { border-top: 2px solid var(--text-main); padding-top: 2rem; }
+        .step-number { font-size: 1.5rem; font-weight: 800; color: var(--text-muted); margin-bottom: 1rem; }
+        .step-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .step-card p { color: var(--text-muted); }
+
+        /* What Makes Us Different */
+        .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .diff-card { background: #fafafa; padding: 3rem 2.5rem; border-radius: 8px; border: 1px solid var(--border-color); }
+        .diff-card h3 { font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .diff-card h3 i { color: var(--whatsapp-green); font-size: 1.2rem; }
+        .diff-card p { color: var(--text-muted); font-size: 1rem; }
+
+        /* Animated Testimonials Marquee */
+        .marquee-wrapper { position: relative; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; padding: 1rem 0; display: flex; flex-direction: column; gap: 2rem; }
+        .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 15vw; height: 100%; z-index: 2; pointer-events: none; }
+        .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-color), transparent); }
+        .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--bg-color), transparent); }
+        .marquee-track { display: flex; gap: 3rem; width: max-content; animation: scroll 60s linear infinite; }
+        .marquee-track.reverse { animation: scroll-reverse 60s linear infinite; }
+        .marquee-track:hover { animation-play-state: paused; }
+        @keyframes scroll { to { transform: translateX(calc(-50% - 1.5rem)); } }
+        @keyframes scroll-reverse { from { transform: translateX(calc(-50% - 1.5rem)); } to { transform: translateX(0); } }
+        .testimonial-card { width: 450px; flex-shrink: 0; border: 1px solid var(--border-color); padding: 2.5rem; background-color: var(--bg-color); transition: border-color 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .testimonial-card:hover { border-color: var(--text-main); }
+        .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 2rem; line-height: 1.6; color: var(--text-muted); }
+        .testimonial-text strong { color: var(--text-main); font-weight: 700; }
+        .client-info { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
+        .client-name { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); }
+        .client-title { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.15rem; }
+        .client-location { font-size: 0.8rem; font-weight: 500; color: var(--text-main); background: #f5f5f5; padding: 0.3rem 0.7rem; border-radius: 4px; }
+
+        /* FAQ Section */
+        .faq-wrapper { max-width: 800px; margin: 0 auto; }
+        details { border-bottom: 1px solid var(--border-color); padding: 1.5rem 0; }
+        summary { font-size: 1.25rem; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '\002B'; font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(45deg); }
+        .faq-content { padding-top: 1rem; color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Contact Section Makeover */
+        .contact-box { text-align: center; max-width: 650px; margin: 0 auto; padding: 4rem 2rem; border: 1px solid var(--border-color); border-radius: 8px; background: #fafafa; }
+
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--black); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; text-decoration: none; transition: transform 0.3s ease, background-color 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); background-color: var(--whatsapp-green); }
+
+        footer { border-top: 1px solid var(--border-color); padding: 4rem 0; text-align: center; }
+        .footer-logo { font-weight: 800; text-transform: uppercase; letter-spacing: -0.05em; margin-bottom: 1rem; }
+        .footer-text { color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 6rem 0 4rem; }
+            .stat-number { font-size: 3rem; }
+            .testimonial-card { width: 320px; padding: 1.5rem; }
+            .client-location { display: none; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- WHATSAPP BUTTON -->
+    <a href="https://wa.me/919194005305?text=I'm%20interested%20in%20working%20with%20Velocity%20Labs" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Velocity Labs.</a>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#testimonials">Results</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="https://cal.com/rishikesh-kumar/30min" target="_blank" rel="noopener noreferrer" class="cta-btn">Book a Call</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>We modernize<br>small businesses.</h1>
+            <p>Through smart automation, powerful AI, seamless websites, and strategic advertising, we deliver solutions that boost efficiency and drive growth.</p>
+            <a href="https://cal.com/rishikesh-kumar/30min" target="_blank" rel="noopener noreferrer" class="cta-btn btn-large">Secure a Slot</a>
+        </header>
+
+        <!-- NEW: Results That Speak for Themselves -->
+        <section id="results" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Results that speak for themselves.</h2>
+                <p class="section-subtitle">We don't focus on vanity metrics. We focus on hours saved, operational efficiency, and bottom-line revenue growth.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Hours saved per week on average via custom AI automation.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3x</div>
+                    <div class="stat-label">Increase in lead generation through strategic, targeted web systems.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Focus on scalable, secure, and modern digital infrastructure.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capabilities Section -->
+        <section id="services" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Capabilities.</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h3>Smart Automation</h3>
+                    <p>Eliminate repetitive tasks and streamline operations to save time and reduce human error.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <h3>Powerful AI</h3>
+                    <p>Leverage machine learning to make data-driven decisions and predict market trends.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Seamless Websites</h3>
+                    <p>Beautiful, blazing-fast, and responsive web platforms designed to convert visitors.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Strategic Ads</h3>
+                    <p>Targeted, high-ROI ad campaigns that put your brand directly in front of ideal audiences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: How It Works -->
+        <section id="how-it-works" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">How it works.</h2>
+                <p class="section-subtitle">A seamless, plug-and-play process designed to transform your business with zero disruption to your daily operations.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01.</div>
+                    <h3>Deep Dive Audit</h3>
+                    <p>We start by analyzing your current workflows, bottlenecks, and tech stack to identify exactly where automation and strategy can yield the highest ROI.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02.</div>
+                    <h3>Custom Build</h3>
+                    <p>Our team architects tailored solutions—whether it’s a high-converting website, an AI chatbot, or a complex backend automation system.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03.</div>
+                    <h3>Deploy & Scale</h3>
+                    <p>We integrate the systems into your business smoothly, train your team if necessary, and continuously monitor performance to ensure maximum efficiency.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: What Makes Us Different -->
+        <section id="difference" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">What makes us different?</h2>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card">
+                    <h3><i class="fa-solid fa-check"></i> ROI Obsessed</h3>
+                    <p>We aren't interested in selling you flashy tech that you don't need. Every solution we build is directly tied to saving you time or making you money.</p>
+                </div>
+                <div class="diff-card">
+                    <h3><i class="fa-solid fa-check"></i> Speed of Execution</h3>
+                    <p>Forget 6-month consulting phases. We work in rapid, agile sprints to deploy working systems into your business in a matter of weeks, not months.</p>
+                </div>
+                <div class="diff-card">
+                    <h3><i class="fa-solid fa-check"></i> True Partnerships</h3>
+                    <p>We operate as an extension of your team. We don't just hand over a software login and disappear; we ensure the systems actually drive growth.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Global Impact.</h2>
+                <p class="section-subtitle">Trusted by businesses across India and around the world.</p>
+            </div>
+            
+            <div class="marquee-wrapper">
+                <!-- Track 1: Moving Left -->
+                <div class="marquee-track">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs is nothing short of a miracle worker. Their AI automation reduced our cart abandonment by 60% and <strong>doubled our revenue in just three months.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Vikram Singhania</div><div class="client-title">Founder, StyleCart</div></div><div class="client-location">Mumbai, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The automation tools provided by Velocity Labs scaled our operations overnight. We couldn't believe the efficiency. We literally <strong>save over 40 hours a week</strong>."</p>
+                        <div class="client-info"><div><div class="client-name">Arjun Mehta</div><div class="client-title">CEO, TechNova</div></div><div class="client-location">Bengaluru, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I cannot overstate the impact Velocity Labs has had on us. They completely overhauled our web presence and ad strategy, driving a <strong>300% increase in qualified enterprise leads.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Chloe Dubois</div><div class="client-title">Growth Lead, MetricFlow</div></div><div class="client-location">Paris, FR</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs completely transformed how we handle inquiries. Their strategic advertising approach finally gave us a <strong>massive, positive ROI</strong> on our social media spend."</p>
+                        <div class="client-info"><div><div class="client-name">Elena Rodriguez</div><div class="client-title">Founder, Tierra Goods</div></div><div class="client-location">Madrid, ES</div></div>
+                    </div>
+                    
+                    <!-- Duplicated Set 1 for Seamless Loop -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs is nothing short of a miracle worker. Their AI automation reduced our cart abandonment by 60% and <strong>doubled our revenue in just three months.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Vikram Singhania</div><div class="client-title">Founder, StyleCart</div></div><div class="client-location">Mumbai, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The automation tools provided by Velocity Labs scaled our operations overnight. We couldn't believe the efficiency. We literally <strong>save over 40 hours a week</strong>."</p>
+                        <div class="client-info"><div><div class="client-name">Arjun Mehta</div><div class="client-title">CEO, TechNova</div></div><div class="client-location">Bengaluru, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I cannot overstate the impact Velocity Labs has had on us. They completely overhauled our web presence and ad strategy, driving a <strong>300% increase in qualified enterprise leads.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Chloe Dubois</div><div class="client-title">Growth Lead, MetricFlow</div></div><div class="client-location">Paris, FR</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs completely transformed how we handle inquiries. Their strategic advertising approach finally gave us a <strong>massive, positive ROI</strong> on our social media spend."</p>
+                        <div class="client-info"><div><div class="client-name">Elena Rodriguez</div><div class="client-title">Founder, Tierra Goods</div></div><div class="client-location">Madrid, ES</div></div>
+                    </div>
+                </div>
+
+                <!-- Track 2: Moving Right -->
+                <div class="marquee-track reverse">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Working with Velocity Labs felt like plugging our business into a rocket. The custom automation they built <strong>saved us thousands of manual hours.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Anita Rao</div><div class="client-title">Operations Director, Apex Corp</div></div><div class="client-location">Hyderabad, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Absolute game-changers. Velocity Labs didn't just build a website; <strong>they built a revenue engine.</strong> Our client bookings skyrocketed within just three weeks of launch."</p>
+                        <div class="client-info"><div><div class="client-name">David Thompson</div><div class="client-title">CEO, Horizon Legal</div></div><div class="client-location">New York, US</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs integrated AI that personalized our customer journeys perfectly. <strong>Sales are up 250% year-over-year.</strong> They are a secret weapon."</p>
+                        <div class="client-info"><div><div class="client-name">Neha Desai</div><div class="client-title">Founder, Bloom E-com</div></div><div class="client-location">Delhi, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Our new website is completely flawless. We saw a <strong>record-breaking 400% increase in lead conversions</strong> within the first month."</p>
+                        <div class="client-info"><div><div class="client-name">Marcus Chen</div><div class="client-title">Director, Chen Logistics</div></div><div class="client-location">Singapore, SG</div></div>
+                    </div>
+
+                    <!-- Duplicated Set 2 for Seamless Loop -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Working with Velocity Labs felt like plugging our business into a rocket. The custom automation they built <strong>saved us thousands of manual hours.</strong>"</p>
+                        <div class="client-info"><div><div class="client-name">Anita Rao</div><div class="client-title">Operations Director, Apex Corp</div></div><div class="client-location">Hyderabad, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Absolute game-changers. Velocity Labs didn't just build a website; <strong>they built a revenue engine.</strong> Our client bookings skyrocketed within just three weeks of launch."</p>
+                        <div class="client-info"><div><div class="client-name">David Thompson</div><div class="client-title">CEO, Horizon Legal</div></div><div class="client-location">New York, US</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Velocity Labs integrated AI that personalized our customer journeys perfectly. <strong>Sales are up 250% year-over-year.</strong> They are a secret weapon."</p>
+                        <div class="client-info"><div><div class="client-name">Neha Desai</div><div class="client-title">Founder, Bloom E-com</div></div><div class="client-location">Delhi, IN</div></div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Our new website is completely flawless. We saw a <strong>record-breaking 400% increase in lead conversions</strong> within the first month."</p>
+                        <div class="client-info"><div><div class="client-name">Marcus Chen</div><div class="client-title">Director, Chen Logistics</div></div><div class="client-location">Singapore, SG</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Frequently Asked Questions -->
+        <section id="faq" class="section-padding">
+            <div class="faq-wrapper">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions.</h2>
+                
+                <details>
+                    <summary>What types of businesses do you work with?</summary>
+                    <div class="faq-content">We specialize in working with small to medium-sized businesses that are looking to scale their operations without having to drastically increase their headcount. Whether you are in e-commerce, real estate, logistics, or professional services, our solutions are tailored to your niche.</div>
+                </details>
+                
+                <details>
+                    <summary>Do I need technical skills to use what you build?</summary>
+                    <div class="faq-content">Not at all. We build complex systems on the backend, but design them to be incredibly intuitive and easy to use on the front end. We also provide full training and handover documentation to ensure your team is confident using the new tools.</div>
+                </details>
+
+                <details>
+                    <summary>How long does implementation take?</summary>
+                    <div class="faq-content">It depends on the scope of the project. A custom landing page or basic automation sequence can be deployed in 1-2 weeks. More complex AI integrations or full operational overhauls typically take 4-6 weeks from discovery to launch.</div>
+                </details>
+
+                <details>
+                    <summary>Is this a one-time fee or an ongoing retainer?</summary>
+                    <div class="faq-content">We offer both depending on your needs. Website builds and specific automation setups are usually one-time project fees. Strategic advertising, continuous AI optimization, and tech support are typically handled on a monthly retainer basis.</div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Minimalist Contact CTA Box -->
+        <section class="section-padding">
+            <div class="contact-box">
+                <h2 class="section-title" style="margin-bottom: 1rem;">Let's talk.</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Book a strategy session below to explore how we can modernize your business, or click the WhatsApp icon to chat with us instantly.</p>
+                <a href="https://cal.com/rishikesh-kumar/30min" target="_blank" rel="noopener noreferrer" class="cta-btn btn-large">Schedule a Strategy Session</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Velocity Labs.</div>
+            <p class="footer-text">&copy; 2026 Velocity Labs. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
